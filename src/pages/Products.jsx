@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+
 import products from "../database.json";
+import Header from "./Header";
 
 export default function Products() {
   return (
