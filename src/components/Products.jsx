@@ -1,8 +1,14 @@
-import products from "../database.json"
+import products from "../database.json";
 
 export default function Products() {
   return (
     <section>
+      <header>
+        <nav style={{ display: "flex", gap: "2rem" }}>
+          <Link to="/products">Produtos</Link>
+          <Link to="/cart">Carrinho</Link>
+        </nav>
+      </header>
       <h2>Todos os produtos</h2>
       <p>Confira todas as nossas ofertas.</p>
       <section className="products">
@@ -19,5 +25,5 @@ export default function Products() {
         </ul>
       </section>
     </section>
-  )
+  );
 }
