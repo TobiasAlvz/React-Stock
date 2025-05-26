@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
     <header>
-      <nav style={{ display: "flex", gap: "2rem" }}>
-        <Link to="/">Início</Link>
-        <Link to="/products">Produtos</Link>
-        <Link to="/cart">Carrinho</Link>
+      <nav>
+        <NavLink to="/">Dashboard</NavLink>
+        <NavLink to="/items">Itens</NavLink>
+        <NavLink to="/admin/cart">Carrinho</NavLink> {}
       </nav>
     </header>
   );
