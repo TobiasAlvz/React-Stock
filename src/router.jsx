@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./pages/Layout";
 import Admin from "./pages/admin/Admin";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Product from "./pages/Product";
+import Home from "./pages/Dashboard";
+import Products from "./pages/ItemsList";
+import Product from "./pages/ItemDetail";
 import Cart from "./pages/Cart";
 import { loadProduct } from "./loaders/products";
 import ProductBoundary from "./error-boundaries/ProductBoundary";
