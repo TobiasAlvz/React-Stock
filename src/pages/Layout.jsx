@@ -5,9 +5,11 @@ export default function RootLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <footer>
-        <p>Feito com React Router</p>
+        <p>Gestor de Estoque © {new Date().getFullYear()}</p>
       </footer>
     </>
   );
