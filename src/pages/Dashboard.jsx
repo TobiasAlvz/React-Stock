@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <h1 className={styles.title}>REACT STOCK</h1>
+      <h1 className={styles.title}>Dashboard de Estoque</h1>
       
       <section className={styles.metrics}>
         <div className={styles.card}>
