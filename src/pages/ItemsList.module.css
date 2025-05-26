@@ -43,22 +43,18 @@
   overflow-x: auto;
 }
 
-/* Adicione estas regras ao seu arquivo existente */
-
 .table {
   width: 100%;
-  border-collapse: collapse; /* Isso é essencial para as bordas funcionarem */
+  border-collapse: collapse;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #cbd5e1;
 }
 
-
-
-/* Remove a borda da última linha */
 .table tr:last-child td {
   border-bottom: none;
 }
@@ -79,15 +75,24 @@
 }
 
 .actionButton {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 0.875rem;
-}
-
-.actionButton {
   background-color: #e2e8f0;
   color: #334155;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: inherit;
+  font-weight: 500;     
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton:hover {
+  background-color: #cbd5e1;
 }
 
 .editButton {
@@ -95,3 +100,15 @@
   color: white;
 }
 
+.editButton:hover {
+  background-color: #d97706;
+}
+
+.deleteButton {
+  background-color: #ef4444;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+}
