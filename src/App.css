@@ -1,10 +1,10 @@
 /* Cores principais */
 :root {
-  --bg-color: #1a1a2e;        /* Fundo azul escuro */
-  --text-color: #e6e6e6;      /* Texto branco suave */
-  --primary: #4cc9f0;         /* Azul claro (destaque) */
-  --secondary: #f72585;       /* Rosa (para ações/alertas) */
-  --card-bg: #16213e;         /* Fundo dos cards */
+  --bg-color: #1a1a2e;        
+  --text-color: #e6e6e6;    
+  --primary: #4cc9f0;        
+  --secondary: #f72585;       
+  --card-bg: #16213e;        
 }
 * {
   margin: 0;
