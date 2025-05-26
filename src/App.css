@@ -6,7 +6,11 @@
   --secondary: #f72585;       /* Rosa (para ações/alertas) */
   --card-bg: #16213e;         /* Fundo dos cards */
 }
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /* Aplicação das cores */
 body {
   background-color: var(--bg-color);
