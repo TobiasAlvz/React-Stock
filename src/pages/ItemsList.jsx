@@ -31,7 +31,10 @@ export default function ItemsList() {
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
-                <td className={styles.idCell}>{item.id.slice(0, 8)}...</td>
+                <td className={styles.idCell}>
+                  {String(item.id).slice(0, 8)}...{" "}
+                  {/* Garante que seja string */}
+                </td>
                 <td>{item.name}</td>
                 <td className={styles.quantity}>{item.quantity} unid.</td>
                 <td>{item.category}</td>
