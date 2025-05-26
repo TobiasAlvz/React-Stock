@@ -1,53 +1,53 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useEstoque } from '../contexts/EstoqueContext';
-import styles from './NewItem.module.css';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEstoque } from "../contexts/EstoqueContext";
+import styles from "./NewItem.module.css";
 
 export default function NewItem() {
   const { addItem } = useEstoque();
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: '',
-    quantity: '',
-    price: '',
-    category: '',
-    description: ''
+    name: "",
+    quantity: "",
+    price: "",
+    category: "",
+    description: "",
   });
 
   // Categorias disponíveis
-  const categories = ['Jogos', 'Livros', 'Eletrônicos', 'Móveis', 'Outros'];
+  const categories = ["Jogos", "Livros", "Eletrônicos", "Móveis", "Outros"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validação básica
     if (!form.name || !form.quantity || !form.price || !form.category) {
-      alert('Preencha todos os campos obrigatórios!');
+      alert("Preencha todos os campos obrigatórios!");
       return;
     }
 
     // Criar novo item
     const newItem = {
       ...form,
-      id: Date.now().toString(), // ID único
+      id: `item-${Date.now()}`,
       quantity: Number(form.quantity),
       price: Number(form.price),
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     // Adicionar ao estoque
     addItem(newItem);
-    
+
     // Redirecionar para lista de itens
-    navigate('/items');
+    navigate("/items");
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({
+    setForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -112,8 +112,10 @@ export default function NewItem() {
               required
             >
               <option value="">Selecione...</option>
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
               ))}
             </select>
           </div>
@@ -132,17 +134,14 @@ export default function NewItem() {
         </div>
 
         <div className={styles.buttons}>
-          <button 
-            type="button" 
-            onClick={() => navigate('/items')} 
+          <button
+            type="button"
+            onClick={() => navigate("/items")}
             className={styles.cancelButton}
           >
             Cancelar
           </button>
-          <button 
-            type="submit" 
-            className={styles.submitButton}
-          >
+          <button type="submit" className={styles.submitButton}>
             Adicionar Item
           </button>
         </div>
