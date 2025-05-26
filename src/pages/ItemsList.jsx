@@ -3,7 +3,13 @@ import styles from "./ItemsList.module.css";
 import { useEstoque } from "../contexts/EstoqueContext";
 
 export default function ItemsList() {
-  const { items } = useEstoque();
+  const { items, deleteItem } = useEstoque(); 
+
+  const handleDelete = (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este item?")) {
+      deleteItem(id);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -32,8 +38,7 @@ export default function ItemsList() {
             {items.map((item) => (
               <tr key={item.id}>
                 <td className={styles.idCell}>
-                  {String(item.id).slice(0, 8)}...{" "}
-                  {/* Garante que seja string */}
+                  {String(item.id).slice(0, 8)}...
                 </td>
                 <td>{item.name}</td>
                 <td className={styles.quantity}>{item.quantity} unid.</td>
@@ -51,6 +56,12 @@ export default function ItemsList() {
                   >
                     Editar
                   </Link>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className={`${styles.actionButton} ${styles.deleteButton}`}
+                  >
+                     Excluir
+                  </button>
                 </td>
               </tr>
             ))}
