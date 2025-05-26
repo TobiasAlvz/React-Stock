@@ -17,15 +17,28 @@ export function EstoqueProvider({ children }) {
   }, [items]);
 
   const addItem = (newItem) => {
-    setItems([...items, { ...newItem, id: Date.now(), createdAt: new Date().toISOString() }]);
+    try {
+      setItems((prev) => [
+        ...prev,
+        {
+          ...newItem,
+          id: String(newItem.id), // Garante ID como string
+        },
+      ]);
+    } catch (error) {
+      console.error("Erro ao adicionar item:", error);
+      alert("Ocorreu um erro ao salvar o item");
+    }
   };
 
   const updateItem = (id, updatedItem) => {
-    setItems(items.map(item => item.id === id ? { ...item, ...updatedItem } : item));
+    setItems(
+      items.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
+    );
   };
 
   const deleteItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
+    setItems(items.filter((item) => item.id !== id));
   };
 
   return (
