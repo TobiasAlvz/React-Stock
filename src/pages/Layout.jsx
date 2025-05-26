@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function RootLayout() {
   return (
@@ -8,9 +9,7 @@ export default function RootLayout() {
       <main>
         <Outlet />
       </main>
-      <footer>
-        <p>Gestor de Estoque © {new Date().getFullYear()}</p>
-      </footer>
+      <Footer />
     </>
   );
 }
