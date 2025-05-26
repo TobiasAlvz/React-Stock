@@ -1,37 +1,59 @@
 import { Link } from "react-router-dom";
+import styles from "./ItemsList.module.css";
 import { useEstoque } from "../contexts/EstoqueContext";
 
 export default function ItemsList() {
-  const { items, deleteItem } = useEstoque();
+  const { items } = useEstoque();
 
   return (
-    <section>
-      <h2>Lista de Itens</h2>
-      <Link to="/items/new">Adicionar Item</Link>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
-              <td>R$ {item.price.toFixed(2)}</td>
-              <td>
-                <Link to={`/items/${item.id}`}>Ver</Link>
-                <Link to={`/items/${item.id}/edit`}>Editar</Link>
-                <button onClick={() => deleteItem(item.id)}>Excluir</button>
-              </td>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>Itens em Estoque</h1>
+      </header>
+
+      <div className={styles.actions}>
+        <Link to="/items/new" className={styles.newButton}>
+          + Novo Item
+        </Link>
+      </div>
+
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Em Estoque</th>
+              <th>Categoria</th>
+              <th>Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td className={styles.idCell}>{item.id.slice(0, 8)}...</td>
+                <td>{item.name}</td>
+                <td className={styles.quantity}>{item.quantity} unid.</td>
+                <td>{item.category}</td>
+                <td className={styles.actionsCell}>
+                  <Link
+                    to={`/items/${item.id}`}
+                    className={styles.actionButton}
+                  >
+                    Ver
+                  </Link>
+                  <Link
+                    to={`/items/${item.id}/edit`}
+                    className={`${styles.actionButton} ${styles.editButton}`}
+                  >
+                    Editar
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
