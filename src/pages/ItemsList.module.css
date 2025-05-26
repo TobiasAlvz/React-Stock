@@ -43,22 +43,24 @@
   overflow-x: auto;
 }
 
+/* Adicione estas regras ao seu arquivo existente */
+
 .table {
   width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse; /* Isso é essencial para as bordas funcionarem */
 }
 
-.table th {
-  background-color: #f1f5f9;
-  color: #334155;
+.table th, .table td {
   padding: 1rem;
   text-align: left;
+  border-bottom: 1px solid #cbd5e1;
 }
 
-.table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e2e8f0;
+
+
+/* Remove a borda da última linha */
+.table tr:last-child td {
+  border-bottom: none;
 }
 
 .idCell {
