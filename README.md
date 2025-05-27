@@ -1,25 +1,12 @@
-# React Stock 📦
+# React + Vite
 
-**React Stock** é uma aplicação SPA de gestão de estoque desenvolvida com **React**, **React Router** e **Vite**. Permite o controle completo de produtos, com funcionalidades de cadastro, edição, exclusão e visualização de itens, além de um dashboard com métricas úteis. Os dados são persistidos localmente no navegador via `localStorage`.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🔥 Funcionalidades
+Currently, two official plugins are available:
 
-- Dashboard com:
-  - Total de tipos de itens
-  - Quantidade total de itens no estoque
-  - Itens adicionados nos últimos 10 dias
-  - Itens com menos de 10 unidades
-- Listagem completa de itens com ações de visualizar, editar e excluir
-- Cadastro de novos itens
-- Edição de itens existentes
-- Visualização detalhada de cada item
-- Navegação client-side com React Router
-- Persistência de dados com localStorage
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+## Expanding the ESLint configuration
 
-## 📦 Como rodar o projeto
-
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/seu-usuario/react-stock.git
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
