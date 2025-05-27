@@ -18,19 +18,22 @@ export default function EditItem() {
 
   const categories = ["Jogos", "Livros", "Eletrônicos", "Móveis", "Outros"];
 
-  // Carrega os dados do item ao iniciar
+  // Carrega os dados do item
   useEffect(() => {
-    const itemToEdit = items.find((item) => item.id === id);
-    if (itemToEdit) {
+    const item = items.find((item) => item.id === id);
+    if (item) {
       setForm({
-        name: itemToEdit.name,
-        quantity: itemToEdit.quantity,
-        price: itemToEdit.price,
-        category: itemToEdit.category,
-        description: itemToEdit.description || "",
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+        category: item.category,
+        description: item.description || "",
       });
+    } else {
+      alert("Item não encontrado!");
+      navigate("/items");
     }
-  }, [id, items]);
+  }, [id, items, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,15 +43,14 @@ export default function EditItem() {
       return;
     }
 
-    const updatedItem = {
-      ...form,
-      id,
+    updateItem(id, {
+      name: form.name,
       quantity: Number(form.quantity),
       price: Number(form.price),
-      updatedAt: new Date().toISOString(),
-    };
+      category: form.category,
+      description: form.description,
+    });
 
-    updateItem(id, updatedItem);
     navigate(`/items/${id}`);
   };
 
@@ -151,3 +153,4 @@ export default function EditItem() {
     </div>
   );
 }
+
