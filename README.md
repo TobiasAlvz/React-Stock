@@ -16,14 +16,6 @@
 - Navegação client-side com React Router
 - Persistência de dados com localStorage
 
-## 🚀 Tecnologias
-
-- [React](https://reactjs.org/)
-- [React Router](https://reactrouter.com/)
-- [Vite](https://vitejs.dev/)
-- JavaScript (ES6+)
-- CSS Modules (ou seu sistema de estilo preferido)
-- localStorage
 
 ## 📦 Como rodar o projeto
 
