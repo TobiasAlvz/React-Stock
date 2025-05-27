@@ -62,8 +62,7 @@ export default function EditItem() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>REACT STOCK</h1>
-        <h2>Editar Item</h2>
+        <h1>Editar Item</h1>
       </header>
 
       <form onSubmit={handleSubmit} className={styles.form}>
