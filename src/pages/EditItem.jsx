@@ -1,3 +1,4 @@
+// EditItem.js
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEstoque } from "../contexts/EstoqueContext";
@@ -15,10 +16,10 @@ export default function EditItem() {
     category: "",
     description: "",
   });
+  const [formErrors, setFormErrors] = useState({});
 
   const categories = ["Jogos", "Livros", "Eletrônicos", "Móveis", "Outros"];
 
-  // Carrega os dados do item
   useEffect(() => {
     const item = items.find((item) => item.id === id);
     if (item) {
@@ -35,11 +36,20 @@ export default function EditItem() {
     }
   }, [id, items, navigate]);
 
+  const validateForm = () => {
+    const errors = {};
+    if (!form.name.trim()) errors.name = "Nome é obrigatório";
+    if (form.quantity <= 0) errors.quantity = "Quantidade deve ser positiva";
+    if (form.price <= 0) errors.price = "Preço deve ser positivo";
+    if (!form.category) errors.category = "Selecione uma categoria";
+    return errors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!form.name || !form.quantity || !form.price || !form.category) {
-      alert("Preencha todos os campos obrigatórios!");
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       return;
     }
 
@@ -57,6 +67,7 @@ export default function EditItem() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   return (
@@ -76,6 +87,9 @@ export default function EditItem() {
             onChange={handleChange}
             required
           />
+          {formErrors.name && (
+            <span className={styles.error}>{formErrors.name}</span>
+          )}
         </div>
 
         <div className={styles.formRow}>
@@ -90,6 +104,9 @@ export default function EditItem() {
               onChange={handleChange}
               required
             />
+            {formErrors.quantity && (
+              <span className={styles.error}>{formErrors.quantity}</span>
+            )}
           </div>
 
           <div className={styles.formGroup}>
@@ -104,6 +121,9 @@ export default function EditItem() {
               onChange={handleChange}
               required
             />
+            {formErrors.price && (
+              <span className={styles.error}>{formErrors.price}</span>
+            )}
           </div>
 
           <div className={styles.formGroup}>
@@ -114,6 +134,7 @@ export default function EditItem() {
               value={form.category}
               onChange={handleChange}
               required
+              className={styles.select}
             >
               <option value="">Selecione...</option>
               {categories.map((cat) => (
@@ -122,6 +143,9 @@ export default function EditItem() {
                 </option>
               ))}
             </select>
+            {formErrors.category && (
+              <span className={styles.error}>{formErrors.category}</span>
+            )}
           </div>
         </div>
 
@@ -152,4 +176,3 @@ export default function EditItem() {
     </div>
   );
 }
-

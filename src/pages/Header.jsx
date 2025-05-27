@@ -22,14 +22,6 @@ export default function Header() {
         >
           Items
         </NavLink>
-        <NavLink
-          to="/cart"
-          className={({ isActive }) =>
-            isActive ? `${styles.link} ${styles.active}` : styles.link
-          }
-        >
-          Carrinho
-        </NavLink>
       </nav>
     </header>
   );

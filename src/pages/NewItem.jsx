@@ -1,3 +1,4 @@
+// NewItem.js
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEstoque } from "../contexts/EstoqueContext";
@@ -13,20 +14,27 @@ export default function NewItem() {
     category: "",
     description: "",
   });
+  const [formErrors, setFormErrors] = useState({});
 
-  // Categorias disponíveis
   const categories = ["Jogos", "Livros", "Eletrônicos", "Móveis", "Outros"];
+
+  const validateForm = () => {
+    const errors = {};
+    if (!form.name.trim()) errors.name = "Nome é obrigatório";
+    if (form.quantity <= 0) errors.quantity = "Quantidade deve ser positiva";
+    if (form.price <= 0) errors.price = "Preço deve ser positivo";
+    if (!form.category) errors.category = "Selecione uma categoria";
+    return errors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validação básica
-    if (!form.name || !form.quantity || !form.price || !form.category) {
-      alert("Preencha todos os campos obrigatórios!");
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       return;
     }
 
-    // Criar novo item
     const newItem = {
       ...form,
       id: `item-${Date.now()}`,
@@ -36,19 +44,14 @@ export default function NewItem() {
       updatedAt: new Date().toISOString(),
     };
 
-    // Adicionar ao estoque
     addItem(newItem);
-
-    // Redirecionar para lista de itens
     navigate("/items");
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   return (
@@ -70,6 +73,9 @@ export default function NewItem() {
             placeholder="Digite o nome do item"
             required
           />
+          {formErrors.name && (
+            <span className={styles.error}>{formErrors.name}</span>
+          )}
         </div>
 
         <div className={styles.formRow}>
@@ -85,6 +91,9 @@ export default function NewItem() {
               placeholder="0"
               required
             />
+            {formErrors.quantity && (
+              <span className={styles.error}>{formErrors.quantity}</span>
+            )}
           </div>
 
           <div className={styles.formGroup}>
@@ -100,6 +109,9 @@ export default function NewItem() {
               placeholder="0.00"
               required
             />
+            {formErrors.price && (
+              <span className={styles.error}>{formErrors.price}</span>
+            )}
           </div>
 
           <div className={styles.formGroup}>
@@ -110,6 +122,7 @@ export default function NewItem() {
               value={form.category}
               onChange={handleChange}
               required
+              className={styles.select}
             >
               <option value="">Selecione...</option>
               {categories.map((cat) => (
@@ -118,6 +131,9 @@ export default function NewItem() {
                 </option>
               ))}
             </select>
+            {formErrors.category && (
+              <span className={styles.error}>{formErrors.category}</span>
+            )}
           </div>
         </div>
 

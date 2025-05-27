@@ -92,8 +92,16 @@
 }
 
 .quantity {
-  color: var(--secondary);
+  color: #e74c3c;
   font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.date {
+  display: block;
+  font-size: 0.875rem;
+  color: #a0aec0;
+  margin-top: 0.25rem;
 }
 
 .action {
@@ -114,8 +122,8 @@
   background-color: #38bdf8;
 }
 
-.quantity {
-  color: #e74c3c;
-  font-weight: bold;
-  margin-left: 0.5rem;
+.emptyMessage {
+  color: #999;
+  font-style: italic;
+  margin-top: 1rem;
 }

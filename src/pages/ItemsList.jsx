@@ -1,13 +1,33 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ItemsList.module.css";
 import { useEstoque } from "../contexts/EstoqueContext";
 
 export default function ItemsList() {
-  const { items, deleteItem } = useEstoque(); 
+  const { items, deleteItem } = useEstoque();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
 
-  const handleDelete = (id) => {
-    if (window.confirm("Tem certeza que deseja excluir este item?")) {
+  const categories = [...new Set(items.map((item) => item.category))];
+
+  const filteredItems = items.filter((item) => {
+    const matchesSearch = item.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesCategory = categoryFilter
+      ? item.category === categoryFilter
+      : true;
+    return matchesSearch && matchesCategory;
+  });
+
+  const handleDelete = (id, name) => {
+    if (
+      window.confirm(
+        `Tem certeza que deseja excluir "${name}"? Esta ação não pode ser desfeita.`
+      )
+    ) {
       deleteItem(id);
+      alert(`"${name}" foi excluído com sucesso!`);
     }
   };
 
@@ -17,7 +37,26 @@ export default function ItemsList() {
         <h1>Itens em Estoque</h1>
       </header>
 
-      <div className={styles.actions}>
+      <div className={styles.filters}>
+        <input
+          type="text"
+          placeholder="Buscar por nome..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+        >
+          <option value="">Todas categorias</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+
         <Link to="/items/new" className={styles.newButton}>
           + Novo Item
         </Link>
@@ -35,7 +74,7 @@ export default function ItemsList() {
             </tr>
           </thead>
           <tbody>
-            {items.map((item) => (
+            {filteredItems.map((item) => (
               <tr key={item.id}>
                 <td className={styles.idCell}>
                   {String(item.id).slice(0, 8)}
@@ -57,16 +96,20 @@ export default function ItemsList() {
                     Editar
                   </Link>
                   <button
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item.id, item.name)}
                     className={`${styles.actionButton} ${styles.deleteButton}`}
                   >
-                     Excluir
+                    Excluir
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        {filteredItems.length === 0 && (
+          <p className={styles.emptyMessage}>Nenhum item encontrado.</p>
+        )}
       </div>
     </div>
   );

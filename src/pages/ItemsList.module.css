@@ -85,8 +85,8 @@
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: inherit;
-  font-weight: 500;     
-  display: inline-flex; 
+  font-weight: 500;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -111,4 +111,46 @@
 
 .deleteButton:hover {
   background-color: #dc2626;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1f1f2e;
+  color: #f0f0f0;
+  font-size: 1rem;
+}
+
+.filters input::placeholder {
+  color: #aaa;
+}
+
+.filters select {
+  cursor: pointer;
+}
+
+.newButton {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.newButton:hover {
+  background-color: #2563eb;
 }
